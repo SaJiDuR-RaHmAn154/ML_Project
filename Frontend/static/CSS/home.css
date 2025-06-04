@@ -1,0 +1,93 @@
+body {
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  min-height: 100vh;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #2d8ea1 !important;
+}
+.hero-section {
+  background: url("https://images.unsplash.com/photo-1511174511562-5f97f4f4e0c8?auto=format&fit=crop&w=1500&q=80")
+    center/cover no-repeat;
+  color: #fff;
+  padding: 80px 0 100px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.hero-section h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+.hero-section p {
+  font-size: 1.5rem;
+}
+.cardiology-slider img {
+  height: 350px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+.info-card {
+  border-radius: 1rem;
+  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.08);
+  transition: transform 0.2s;
+}
+.info-card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+.footer {
+  background: #2d8ea1;
+  color: #fff;
+  padding: 30px 0 10px 0;
+  margin-top: 60px;
+}
+.welcome-msg {
+  font-size: 1.5rem;
+  color: #2d8ea1;
+  margin-top: 30px;
+}
+
+.navbar-nav .nav-link:hover {
+  font-weight: bold;
+  color: #2d8ea1 !important;
+  border-bottom: 3px solid #2d8ea1;
+  background-color: #f0f8ff;
+  transition: all 0.2s;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+
+/* Navbar active item styling */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus {
+  font-weight: bold;
+  border-bottom: 3px solid #2d8ea1;
+  color: #2d8ea1 !important;
+}
+.navbar-nav .nav-link {
+  transition: border-bottom 0.2s, color 0.2s;
+}
+.navbar-brand img {
+  height: 36px;
+  margin-right: 10px;
+  margin-top: -4px;
+}
+
+.btn-assessment {
+  background: #fff;
+  color: #2d8ea1;
+  border: 2px solid #2d8ea1;
+  font-weight: bold;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.btn-assessment:hover,
+.btn-assessment:focus {
+  background: #14b5adea; /* Teal shade for hover */
+  color: #fff;
+  border-color: #1abc9c;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
+}
