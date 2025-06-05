@@ -86,7 +86,7 @@ body {
 
 .btn-assessment:hover,
 .btn-assessment:focus {
-  background: #14b5adea; 
+  background: #14b5adea;
   color: #fff;
   border-color: #1abc9c;
   box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
