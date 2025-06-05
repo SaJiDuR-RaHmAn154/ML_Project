@@ -236,3 +236,97 @@ body {
   box-shadow: 0 2px 8px rgba(44,62,80,0.10);
 }
 /* --- End Cardiology Slider --- */
+
+/* --- Footer Custom Styling --- */
+.footer-modern {
+  background: linear-gradient(90deg, #e0f7fa 60%, #f8fafc 100%);
+  border-top: 2px solid #2d8ea1;
+  box-shadow: 0 -2px 12px rgba(44,62,80,0.06);
+  font-size: 1.07rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+.footer-modern .footer-link {
+  color: #2d8ea1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.18s;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+.footer-modern .footer-link:hover,
+.footer-modern .footer-link:focus {
+  color: #fff;
+  background: #2d8ea1;
+  text-decoration: none;
+}
+.footer-modern .footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+.footer-modern .footer-social-link {
+  color: #2d8ea1;
+  font-size: 1.35rem;
+  transition: color 0.18s, transform 0.18s;
+  display: inline-block;
+}
+.footer-modern .footer-social-link:hover {
+  color: #1abc9c;
+  transform: scale(1.15);
+}
+.footer-modern .footer-cert img {
+  vertical-align: middle;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.footer-modern .footer-cert img:hover {
+  opacity: 1;
+}
+.footer-modern .footer-newsletter input[type="email"] {
+  border-radius: 1rem 0 0 1rem;
+  border: 1px solid #2d8ea1;
+}
+.footer-modern .footer-newsletter .btn {
+  border-radius: 0 1rem 1rem 0;
+  font-weight: 500;
+}
+.footer-simple {
+  background: linear-gradient(90deg, #2d8ea1 0%, #6dd5ed 100%);
+  color: #fff;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 -2px 12px rgba(44,62,80,0.10);
+  font-size: 1.13rem;
+  letter-spacing: 0.5px;
+}
+.footer-simple-text {
+  color: #fff;
+  font-weight: 500;
+}
+@media (max-width: 767px) {
+  .footer-modern {
+    font-size: 0.98rem;
+    text-align: center;
+    border-radius: 0;
+  }
+  .footer-modern .footer-link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .footer-modern .footer-newsletter {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer-modern .footer-newsletter input[type="email"] {
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .footer-modern .footer-newsletter .btn {
+    border-radius: 1rem;
+  }
+  .footer-simple {
+    border-radius: 0;
+    font-size: 1rem;
+  }
+}
