@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
+  <head>
     <title>Predict Heart Disease</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap 5 CSS for Navbar -->
@@ -20,7 +20,84 @@
       href="{{ url_for('static', filename='CSS/home.css') }}"
     />
   </head>
-<body>
-	
-</body>
+  <body
+    class="flex flex-col min-h-screen bg-gradient-to-tr from-cyan-200 via-blue-100 to-pink-100"
+  >
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{{ url_for('home') }}"
+        >
+          <span class="navbar-logo-wrapper">
+            <img
+              src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
+              alt="Logo"
+              class="navbar-logo"
+            />
+          </span>
+          <span
+            class="ms-2 fw-bold"
+            style="font-size: 2rem; letter-spacing: 1px"
+            >CardioInsight</span
+          >
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a id="home-nav" class="nav-link" href="{{ url_for('home') }}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              id="predict-nav"
+              class="nav-link active"
+              href="{{ url_for('find') }}"
+              >Predict</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://www.heart.org/en/health-topics/heart-attack"
+              target="_blank"
+              >Cardiac Info</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://www.cdc.gov/heartdisease/prevention.html"
+              target="_blank"
+              >Prevention</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="https://www.cdc.gov/heartdisease/facts.html"
+              target="_blank"
+              >Statistics</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+  </body>
 </html>
