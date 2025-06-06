@@ -51,12 +51,19 @@
           <a href="{{ url_for('signup') }}" class="text-[#1abc9c] hover:underline">New User? Register</a>
           <a href="{{ url_for('forgot') }}" class="text-[#1abc9c] hover:underline">Forgot Password?</a>
         </div>
-        <!-- {% if msg %}
+        {% if msg %}
         <div class="alert alert-danger mt-4 py-2 text-base text-center rounded-lg bg-red-100 text-red-700 border border-red-200">{{ msg }}</div>
-        {% endif %} -->
+        {% endif %}
+        <div class="text-center mt-4">
+          <a href="{{ url_for('home') }}?guest=1"
+             class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-[#e0f7fa] to-[#6dd5ed] text-[#2d8ea1] font-semibold shadow hover:from-[#b2ebf2] hover:to-[#38bdf8] transition"
+             style="text-decoration: none;">
+            <i class="bi bi-house-door-fill text-xl"></i>
+            Guest Mode
+          </a>
+        </div>
       </div>
     </div>
   </div>
-
 </body>
 </html>
