@@ -304,6 +304,30 @@ body {
   color: #fff;
   font-weight: 500;
 }
+.navbar-logo-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e0f7fa 60%, #6dd5ed 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.12);
+  padding: 4px;
+  border: 2.5px solid #fff;
+  height: 48px;
+  width: 48px;
+}
+.navbar-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  background: #fff;
+  display: block;
+  margin: 0 auto;
+}
 @media (max-width: 767px) {
   .footer-modern {
     font-size: 0.98rem;
