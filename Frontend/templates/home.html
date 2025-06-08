@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>CardioInsight: Smart Heart Risk Detection</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Images/favicon.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap 5 -->
     <link
@@ -287,12 +288,12 @@
                   Helps identify silent risk factors before symptoms appear.
                 </li>
                 <li>Provides peace of mind and motivates healthy habits.</li>
-              </ul>
-              <div class="d-flex justify-content-center mt-3">
-                <a href="{{ url_for('find') }}" class="btn btn-outline-success"
+                 <div class="d-flex justify-content-center mt-3">
+                <a href="{{ url_for('find') }}" class="btn btn-outline-success" 
                   >Check Your Risk</a
                 >
               </div>
+              </ul>
             </div>
           </div>
         </div>
@@ -317,7 +318,7 @@
                 <li>Maintain a healthy weight and waistline.</li>
                 <li>Stay hydrated and avoid sugary drinks.</li>
               </ul>
-              <div class="d-flex justify-content-center mt-3">
+              <div class="d-flex justify-content-center mt-4">
                 <a
                   href="https://www.cdc.gov/heartdisease/prevention.html"
                   class="btn btn-outline-success"
