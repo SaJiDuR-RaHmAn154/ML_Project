@@ -10,13 +10,11 @@ ML_Project/
 │   ├── database.py             # MongoDB database operations
 │   ├── templates/              # HTML templates (login, signup, home, etc.)
 │   ├── static/                 # Static files (CSS, images, JS)
-│   │   ├── CSS/
-│   │   └── Images/
-│   └── requirements.txt        # Python dependencies
-│
-├── heart.csv                   # Main dataset (large)
+│       ├── CSS/
+│       └── Images/
+│   
 ├── Heart_Disease_Dataset.csv   # Dataset with headers only (for transfer)
-└── ...                         # Other files
+└── requirements.txt        # Python dependencies
 ```
 
 - **app.py**: Main Flask backend for the web app.
