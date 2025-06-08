@@ -16,4 +16,4 @@ app.config["MAIL_USERNAME"] = "shareserial120@gmail.com"
 app.config["MAIL_PASSWORD"] = "wvxh fsvs yfwx zhwk"
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
-app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_PERMANENT'] = False 
