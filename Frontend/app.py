@@ -59,3 +59,29 @@ def home():
 @login_required
 def find():
     return render_template("find.html", name=session.get("username", "Guest"))
+
+# --- Handles prediction form submission and result display ---
+@app.route('/check', methods=['GET', 'POST'])
+@login_required
+def check():
+    msg = None
+    if request.method == 'POST':
+        age = float(request.form["age"])
+        r1 = request.form["r1"]
+        cp = int(r1)
+        BP = float(request.form["BP"])
+        CH = float(request.form["CH"])
+        maxhr = float(request.form["maxhr"])
+        STD = float(request.form["STD"])
+        fluro = float(request.form["fluro"])
+        Th = float(request.form["Th"])
+        d = [[age, cp, BP, CH, maxhr, STD, fluro, Th]]
+        with open("heartdiseaseprediction.model", "rb") as f:
+            model = pickle.load(f)
+        res = model.predict(d)
+        msg = res
+        if 'username' in session:
+            add_checkup_history(session['username'], {
+                "age": age, "cp": cp, "BP": BP, "CH": CH, "maxhr": maxhr, "STD": STD, "fluro": fluro, "Th": Th
+            }, str(res))
+    return render_template("find.html", msg=msg, name=session.get("username", "Guest"))
