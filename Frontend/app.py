@@ -85,3 +85,37 @@ def check():
                 "age": age, "cp": cp, "BP": BP, "CH": CH, "maxhr": maxhr, "STD": STD, "fluro": fluro, "Th": Th
             }, str(res))
     return render_template("find.html", msg=msg, name=session.get("username", "Guest"))
+
+# --- User signup route: handles registration and password email ---
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    msg = None
+    msg_type = None
+    if request.method == "POST":
+        username = request.form.get("un")
+        email = request.form.get("em")
+        # Generate a new 6-digit numeric password
+        new_password = str(random.randint(100000, 999999))
+
+        if insert_user(username, new_password, email):
+            # Send the new password to the user's email
+            try:
+                msg_mail = Message(
+                    subject="Welcome to CardioInsight!",
+                    sender=app.config["MAIL_USERNAME"],
+                    recipients=[email],
+                    body=f"Hello {username},\n\nYour account has been created.\nYour password is: {new_password}\n\nPlease login with this password.\n\nThank you,\nCardioInsight Team"
+                )
+                print(f"Sending email to {email} with password: {new_password}")
+                mail.send(msg_mail)
+                msg = "Signed up successfully"
+                msg_type = "success"
+                return redirect(url_for("login", msg=msg, msg_type=msg_type))
+            except Exception as e:
+                msg = "Signup succeeded but failed to send email. Please contact support."
+                msg_type = "danger"
+                return render_template("signup.html", msg=msg, msg_type=msg_type)
+        else:
+            msg = "Email already exists. Try another."
+            msg_type = "danger"
+    return render_template("signup.html", msg=msg, msg_type=msg_type)
