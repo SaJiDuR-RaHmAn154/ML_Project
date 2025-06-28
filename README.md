@@ -170,12 +170,12 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 Below are some screenshots demonstrating the CardioInsight web app:
 
 ### Login Page
-![Login Page](static/Images/login_screenshot.png)
+![Login Page](/Frontend/static/Images/login_screenshot.png)
 
 ### Signup Page
-![Signup Page](static/Images/signup_screenshot.png)
+![Signup Page](/Frontend/static/Images/signup_screenshot.png)
 
 ### Forgot Password Page
-![Forgot Password Page](static/Images/forgot_screenshot.png)
+![Forgot Password Page](/Frontend/static/Images/forgot_screenshot.png)
 
 **Enjoy using CardioInsight! Stay heart healthy.**
