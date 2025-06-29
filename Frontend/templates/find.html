@@ -19,6 +19,12 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/home.css') }}"
     />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='Images/favicon.png') }}"
+    />
   </head>
   <body
     class="flex flex-col min-h-screen bg-gradient-to-tr from-cyan-200 via-blue-100 to-pink-100"
@@ -26,7 +32,10 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{{ url_for('home') }}"
+        >
           <span class="navbar-logo-wrapper">
             <img
               src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
@@ -34,60 +43,80 @@
               class="navbar-logo"
             />
           </span>
-          <span class="ms-2 fw-bold" style="font-size:2rem; letter-spacing:1px;">CardioInsight</span>
+          <span
+            class="ms-2 fw-bold"
+            style="font-size: 2rem; letter-spacing: 1px"
+            >CardioInsight</span
+          >
         </a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a id="home-nav" class="nav-link" href="{{ url_for('home') }}"
+            <a
+              class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
+              href="{{ url_for('home') }}"
               >Home</a
             >
           </li>
           <li class="nav-item">
             <a
-              id="predict-nav"
-              class="nav-link active"
+              class="nav-link {% if request.endpoint == 'find' %}active{% endif %}"
               href="{{ url_for('find') }}"
               >Predict</a
             >
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
-              href="https://www.heart.org/en/health-topics/heart-attack"
-              target="_blank"
+              class="nav-link {% if request.endpoint == 'cardiac_info' %}active{% endif %}"
+              href="{{ url_for('cardiac_info') }}"
               >Cardiac Info</a
             >
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
-              href="https://www.cdc.gov/heartdisease/prevention.html"
-              target="_blank"
+              class="nav-link {% if request.endpoint == 'statistics' %}active{% endif %}"
+              href="{{ url_for('statistics') }}"
+              >Statistics</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if request.endpoint == 'prevention' %}active{% endif %}"
+              href="{{ url_for('prevention') }}"
               >Prevention</a
             >
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
-              href="https://www.cdc.gov/heartdisease/facts.html"
-              target="_blank"
-              >Statistics</a
+              class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}"
+              href="{{ url_for('profile') }}"
+              >Profile</a
             >
           </li>
+          {% if session.get('username') %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Logout</a>
+            <form
+              action="{{ url_for('logout') }}"
+              method="post"
+              style="display: inline"
+            >
+              <button class="nav-link btn btn-link" type="submit">
+                Logout
+              </button>
+            </form>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -314,9 +343,9 @@
                     type="number"
                     name="CH"
                     class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 120-420"
+                    placeholder="e.g. 120-600"
                     min="100"
-                    max="500"
+                    max="600"
                     required
                   />
                 </div>
@@ -328,7 +357,7 @@
                     type="number"
                     name="maxhr"
                     class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 70-200 (See chart)"
+                    placeholder="e.g. 70-200"
                     min="60"
                     max="220"
                     required
