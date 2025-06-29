@@ -178,4 +178,11 @@ Below are some screenshots demonstrating the CardioInsight web app:
 ### Forgot Password Page
 ![Forgot Password Page](/Frontend/static/Images/forgot_screenshot.png)
 
+### Predict Page
+![Predict Page](/Frontend/static/Images/predict_screenshot.png)
+
+### User Profile Page
+![Profile Page](/Frontend/static/Images/user_profile1.png)
+![Profile Page](/Frontend/static/Images/user_profile2.png)
+
 **Enjoy using CardioInsight! Stay heart healthy.**
