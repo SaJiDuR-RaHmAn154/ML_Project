@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Predict Heart Disease</title>
+    <meta charset="UTF-8" />
+    <title>Predict Heart Disease - CardioInsight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap 5 CSS for Navbar -->
-
+    <link
+      rel="icon" href= "{{ url_for('static', filename='Images/favicon.png') }}"
+    />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     />
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Custom CSS -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/find.css') }}"
@@ -19,23 +25,12 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/home.css') }}"
     />
-
-    <link
-      rel="icon"
-      type="image/png"
-      href="{{ url_for('static', filename='Images/favicon.png') }}"
-    />
   </head>
-  <body
-    class="flex flex-col min-h-screen bg-gradient-to-tr from-cyan-200 via-blue-100 to-pink-100"
-  >
+  <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-ocean fade-in">
       <div class="container">
-        <a
-          class="navbar-brand d-flex align-items-center"
-          href="{{ url_for('home') }}"
-        >
+        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
           <span class="navbar-logo-wrapper">
             <img
               src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
@@ -43,11 +38,7 @@
               class="navbar-logo"
             />
           </span>
-          <span
-            class="ms-2 fw-bold"
-            style="font-size: 2rem; letter-spacing: 1px"
-            >CardioInsight</span
-          >
+          <span class="ms-2 fw-bold text-gradient" style="font-size: 2rem; letter-spacing: 1px">CardioInsight</span>
         </a>
         <button
           class="navbar-toggler"
@@ -57,387 +48,485 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
-              href="{{ url_for('home') }}"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'find' %}active{% endif %}"
-              href="{{ url_for('find') }}"
-              >Predict</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'cardiac_info' %}active{% endif %}"
-              href="{{ url_for('cardiac_info') }}"
-              >Cardiac Info</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'statistics' %}active{% endif %}"
-              href="{{ url_for('statistics') }}"
-              >Statistics</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'prevention' %}active{% endif %}"
-              href="{{ url_for('prevention') }}"
-              >Prevention</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}"
-              href="{{ url_for('profile') }}"
-              >Profile</a
-            >
-          </li>
-          {% if session.get('username') %}
-          <li class="nav-item">
-            <form
-              action="{{ url_for('logout') }}"
-              method="post"
-              style="display: inline"
-            >
-              <button class="nav-link btn btn-link" type="submit">
-                Logout
-              </button>
-            </form>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
+                href="{{ url_for('home') }}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'find' %}active{% endif %}"
+                href="{{ url_for('find') }}"
+                >Predict</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'cardiac_info' %}active{% endif %}"
+                href="{{ url_for('cardiac_info') }}"
+                >Cardiac Info</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'statistics' %}active{% endif %}"
+                href="{{ url_for('statistics') }}"
+                >Statistics</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'prevention' %}active{% endif %}"
+                href="{{ url_for('prevention') }}"
+                >Prevention</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}"
+                href="{{ url_for('profile') }}"
+                >Profile</a
+              >
+            </li>
+            {% if session.get('username') %}
+            <li class="nav-item">
+              <form
+                action="{{ url_for('logout') }}"
+                method="post"
+                style="display: inline; margin: 0;"
+              >
+                <button class="nav-link btn btn-link" type="submit" style="border: none; background: none; padding: 0.5rem 1rem;">
+                  Logout
+                </button>
+              </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </nav>
 
     <!-- Main Content Area -->
-    <div class="flex flex-grow items-center justify-center py-4">
-      <div
-        class="flex flex-col md:flex-row w-full max-w-7xl mx-auto rounded-3xl shadow-2xl overflow-hidden bg-white/80 backdrop-blur-lg"
-      >
-        <!-- Left panel -->
-        <div
-          class="hidden md:flex md:w-1/2 bg-gradient-to-br from-[#2d8ea1] to-[#6dd5ed] items-center justify-center p-8"
-        >
-          <div class="flex flex-col items-center w-full">
-            <!-- Logo and Title -->
-            <div class="flex flex-col items-center mb-6 w-full">
-              <img
-                src="https://i.pinimg.com/564x/f8/52/9c/f8529c3ee32672146fb127cf1e27af54.jpg"
-                alt="Heart"
-                class="rounded-2xl shadow-lg mb-4 w-40 h-40 object-cover border-4 border-white/70 bg-white/20"
-              />
-              <h2
-                class="text-3xl font-extrabold text-white mb-1 tracking-wide drop-shadow"
-              >
-                Heart Disease Prediction
-              </h2>
-              <p class="text-white/90 text-lg max-w-xs mx-auto mb-2">
-                Welcome,
-                <span class="font-semibold text-yellow-200"
-                  >{{ name or 'Guest' }}</span
-                >
-              </p>
-            </div>
-            <!-- Features -->
-            <div
-              class="bg-white/10 rounded-xl p-6 w-full max-w-xs shadow-lg mb-4"
-            >
-              <ul class="space-y-4">
-                <li class="flex items-center gap-3">
-                  <span
-                    class="inline-flex items-center justify-center rounded-full bg-yellow-100/80 p-2"
-                  >
-                    <svg
-                      class="w-6 h-6 text-yellow-500"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </span>
-                  <span class="text-white font-medium"
-                    >AI-powered risk analysis</span
-                  >
-                </li>
-                <li class="flex items-center gap-3">
-                  <span
-                    class="inline-flex items-center justify-center rounded-full bg-pink-100/80 py-2 px-2"
-                  >
-                    <!-- Doctor/Shield SVG for "Confidential & secure" -->
-                    <svg
-                      class="w-6 h-6 text-pink-400"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9.5 11.5l1.5 1.5 3-3"
-                      />
-                    </svg>
-                  </span>
-                  <span class="text-white font-medium"
-                    >Confidential &amp; secure</span
-                  >
-                </li>
-                <li class="flex items-center gap-3">
-                  <span
-                    class="inline-flex items-center justify-center rounded-full bg-blue-100/80 p-2"
-                  >
-                    <svg
-                      class="w-6 h-6 text-[#38bdf8]"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3 13.5C4.5 11 7 7 12 7s7.5 4 9 6.5"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M8 13l2 2 4-6"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 21C7 17 3 13.5 3 9.5A6.5 6.5 0 0112 3a6.5 6.5 0 019 6.5c0 4-4 7.5-9 11.5z"
-                        fill="#38bdf8"
-                        fill-opacity="0.15"
-                      />
-                    </svg>
-                  </span>
-                  <span class="text-white font-medium"
-                    >Instant prediction results</span
-                  >
-                </li>
-              </ul>
-            </div>
-            <!-- Divider -->
-            <div class="w-full flex items-center my-2">
-              <div class="flex-grow border-t border-white/30"></div>
-              <span class="mx-3 text-white/60 text-xs">Info</span>
-              <div class="flex-grow border-t border-white/30"></div>
-            </div>
-            <!-- Disclaimer -->
-            <div class="text-white/80 text-xs max-w-xs mx-auto text-center">
-              <span class="block mb-1"
-                >Your data is
-                <span class="font-semibold text-white">never stored</span
-                >.</span
-              >
-              <span class="block">Consult a doctor for medical advice.</span>
-              <span class="block mt-2"
-                >For best results, fill all fields accurately.</span
-              >
-            </div>
-          </div>
-        </div>
-        <!-- Right panel with form -->
-        <div class="flex-1 flex items-center justify-center p-4">
-          <div
-            class="w-full max-w-xl bg-white/90 rounded-2xl shadow-xl p-6 transition-transform duration-300 hover:scale-[1.015] hover:shadow-2xl"
-          >
-            <div class="text-center mb-4">
-              <span
-                class="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-[#2dd4bf] to-[#38bdf8] p-3 shadow mb-2"
-              >
-                <img
-                  src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
-                  alt="Heart Logo"
-                  class="w-12 h-12 rounded-full object-cover border-4 border-white/80 shadow"
-                  style="
-                    background: linear-gradient(
-                      135deg,
-                      #2dd4bf 60%,
-                      #38bdf8 100%
-                    );
-                  "
-                />
-              </span>
-              <h3 class="text-xl font-bold text-[#2d8ea1] mb-1">
-                Check Your Heart Disease Risk
-              </h3>
-              <div class="text-gray-500 mb-2 text-base">
-                Fill the form below to check if you have heart disease or not!
-              </div>
-            </div>
-            <form action="/check" method="POST" autocomplete="off">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Age</label
-                  >
-                  <input
-                    type="number"
-                    name="age"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 18-80"
-                    min="18"
-                    max="100"
-                    required
-                  />
+    <div class="container-fluid py-4 fade-in">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="predict-container d-flex flex-column flex-lg-row rounded-4 shadow-lg overflow-hidden">
+            <!-- Left panel -->
+            <div class="predict-left-panel d-none d-lg-flex flex-column justify-content-center p-4 position-relative overflow-hidden">
+              <div class="d-flex flex-column align-items-center w-100 position-relative z-3">
+                <!-- Logo and Title -->
+                <div class="d-flex flex-column align-items-center mb-3 w-100 fade-in">
+                  <div class="position-relative mb-3">
+                    <img
+                      src="https://i.pinimg.com/564x/34/e5/99/34e5991f23d7d019220e5e8b311af0ba.jpg"
+                      alt="Heart Health"
+                      class="predict-logo rounded-4 shadow-lg border border-white border-3 stable-heart-animation"
+                      style="width: 120px; height: 120px; object-fit: cover;"
+                    />
+                  </div>
+                  <h2 class="text-white fw-bold mb-2 text-center lh-sm fs-4">
+                    <span class="text-gradient-white">Heart Disease Prediction</span>
+                  </h2>
+                  <div class="predict-divider mb-2"></div>
+                  <!-- Welcome message -->
+                  <div class="predict-welcome-card p-3 rounded-4 shadow text-center w-100">
+                    <p class="text-white mb-1 fs-6">Welcome, <span class="fw-bold text-warning animate-float-username">{{ name or 'Guest' }}</span></p>
+                    <p class="text-white-50 mb-0 small">Complete your cardiac risk assessment</p>
+                  </div>
                 </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Chest Pain Type</label
-                  >
-                  <select
-                    name="r1"
-                    class="form-select block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    required
-                  >
-                    <option value="1">Typical Angina (1)</option>
-                    <option value="2">Atypical Angina (2)</option>
-                    <option value="3">Non-anginal Pain (3)</option>
-                    <option value="4">Asymptomatic (4)</option>
-                  </select>
+                
+                <!-- Features -->
+                <div class="predict-features-card p-3 w-100 shadow-lg mb-3 rounded-4">
+                  <h4 class="text-white fw-semibold fs-5 mb-3 text-center">
+                    <i class="bi bi-gear text-warning me-2"></i>Key Features
+                  </h4>
+                  <div class="row g-2">
+                    <div class="col-12">
+                      <div class="d-flex align-items-center predict-feature-item p-2 rounded-3">
+                        <span class="predict-feature-icon me-2 bg-warning" style="width: 32px; height: 32px;">
+                          <i class="bi bi-cpu text-white" style="font-size: 0.9rem;"></i>
+                        </span>
+                        <div class="flex-grow-1">
+                          <div class="text-white fw-semibold small">AI Analysis</div>
+                          <small class="text-white-50" style="font-size: 0.75rem;">Clinical data algorithms</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="d-flex align-items-center predict-feature-item p-2 rounded-3">
+                        <span class="predict-feature-icon me-2 bg-success" style="width: 32px; height: 32px;">
+                          <i class="bi bi-shield-check text-white" style="font-size: 0.9rem;"></i>
+                        </span>
+                        <div class="flex-grow-1">
+                          <div class="text-white fw-semibold small">Secure</div>
+                          <small class="text-white-50" style="font-size: 0.75rem;">Privacy assured</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="d-flex align-items-center predict-feature-item p-2 rounded-3">
+                        <span class="predict-feature-icon me-2 bg-info" style="width: 32px; height: 32px;">
+                          <i class="bi bi-lightning text-white" style="font-size: 0.9rem;"></i>
+                        </span>
+                        <div class="flex-grow-1">
+                          <div class="text-white fw-semibold small">Instant</div>
+                          <small class="text-white-50" style="font-size: 0.75rem;">Rapid assessment</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Blood Pressure (mm Hg)</label
-                  >
-                  <input
-                    type="number"
-                    name="BP"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 90-180 (Normal: &lt;120)"
-                    min="80"
-                    max="200"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Cholesterol (mg/dL)</label
-                  >
-                  <input
-                    type="number"
-                    name="CH"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 120-600"
-                    min="100"
-                    max="600"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Max Heart Rate (bpm)</label
-                  >
-                  <input
-                    type="number"
-                    name="maxhr"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 70-200"
-                    min="60"
-                    max="220"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >ST Depression</label
-                  >
-                  <input
-                    type="number"
-                    name="STD"
-                    step="any"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 0.0 - 6.5"
-                    min="0"
-                    max="7"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >No. of Vessels Fluro</label
-                  >
-                  <input
-                    type="number"
-                    name="fluro"
-                    step="1"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 0-3"
-                    min="0"
-                    max="3"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-gray-700 font-medium mb-1"
-                    >Thallium</label
-                  >
-                  <input
-                    type="number"
-                    name="Th"
-                    class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-3 py-2 text-base transition"
-                    placeholder="e.g. 3, 6, or 7"
-                    min="0"
-                    max="7"
-                    required
-                  />
+                
+                <!-- Disclaimer -->
+                <div class="predict-disclaimer p-3 rounded-4 text-center w-100">
+                  <div class="row g-2 text-white">
+                    <div class="col-12">
+                      <div class="d-flex align-items-start">
+                        <i class="bi bi-lock-fill text-warning me-2 mt-1 fs-6"></i>
+                        <div class="text-start">
+                          <div class="fw-semibold mb-1 small">Data Privacy</div>
+                          <small class="text-white-50" style="font-size: 0.75rem;">Complete confidentiality</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="d-flex align-items-start">
+                        <i class="bi bi-person-badge text-info me-2 mt-1 fs-6"></i>
+                        <div class="text-start">
+                          <div class="fw-semibold mb-1 small">Medical Advice</div>
+                          <small class="text-white-50" style="font-size: 0.75rem;">Consult healthcare professional</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="mt-4">
-                <button
-                  type="submit"
-                  class="w-full py-2 rounded-lg bg-gradient-to-r from-[#2d8ea1] to-[#6dd5ed] text-white font-bold text-base shadow-md hover:from-[#1abc9c] hover:to-[#2d8ea1] transition"
-                >
-                  Predict
-                </button>
-              </div>
-            </form>
-            {% if msg and request.method == 'POST' %}
-            <div
-              class="alert alert-info mt-4 py-2 text-base text-center rounded-lg bg-blue-100 text-blue-700 border border-blue-200"
-            >
-              {{ msg }}
             </div>
-            {% endif %}
-            <div class="text-center mt-2">
-              <a
-                class="text-[#1abc9c] hover:underline text-sm"
-                href="https://www.allbusinesstemplates.com/thumbs/c0cc5eed-c17d-4e24-8650-d8069bbbb52e_1.png"
-                target="_blank"
-              >
-                Click here for more guidance on how to fill the form
-              </a>
+            <!-- Right panel with form -->
+            <div class="flex-grow-1 d-flex align-items-center justify-content-center p-3 p-lg-4">
+              <div class="predict-form-container w-100 p-3 p-lg-4">
+                <div class="predict-form-header">
+                  <div class="predict-form-icon mb-3 heart-symbol-container">
+                    <div class="heart-symbol-wrapper">
+                      <img
+                        src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
+                        alt="CardioInsight Logo"
+                        class="heart-symbol animate-heart-pulse rounded-circle"
+                        style="width: 60px; height: 60px; object-fit: cover; border: 3px solid rgba(255,255,255,0.3);"
+                      />
+                      <div class="heart-symbol-glow"></div>
+                    </div>
+                  </div>
+                  <h3 class="predict-form-title mb-4">Cardiovascular Risk Assessment</h3>
+                  <div class="predict-status-badge d-inline-flex align-items-center">
+                    <span class="spinner-grow spinner-grow-sm text-success me-2" role="status" aria-hidden="true"></span>
+                    All fields required
+                  </div>
+                </div>
+                
+                <form action="/check" method="POST" autocomplete="off" class="fade-in">
+                  <div class="row g-2">
+                    <!-- Age Field -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-calendar-heart text-info me-2"></i>Age (years)
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        class="predict-form-control"
+                        placeholder="Enter you age (18-100)"
+                        min="18"
+                        max="100"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- Sex Field -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-person-badge text-primary me-2"></i>Gender
+                      </label>
+                      <select name="sex" class="predict-form-select" required>
+                        <option value="">Select gender</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Chest Pain Type -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-heart-pulse text-danger me-2"></i>Chest Pain Type
+                      </label>
+                      <select name="r1" class="predict-form-select" required>
+                        <option value="">Select chest pain type</option>
+                        <option value="1">Typical Angina</option>
+                        <option value="2">Atypical Angina</option>
+                        <option value="3">Non-anginal Pain</option>
+                        <option value="4">No chest pain symptoms</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Blood Pressure -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-droplet-fill text-danger me-2"></i>Resting BP (mmHg)
+                      </label>
+                      <input
+                        type="number"
+                        name="BP"
+                        class="predict-form-control"
+                        placeholder="Enter BP (80-200 mmHg)"
+                        min="80"
+                        max="200"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- Cholesterol -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-clipboard2-data text-warning me-2"></i>Cholesterol (mg/dL)
+                      </label>
+                      <input
+                        type="number"
+                        name="CH"
+                        class="predict-form-control"
+                        placeholder="Enter cholesterol (120-600 mg/dL)"
+                        min="100"
+                        max="600"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- FBS over 120 -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-activity text-success me-2"></i>Fasting Blood Sugar
+                      </label>
+                      <select name="fbs" class="predict-form-select" required>
+                        <option value="">Select fasting blood sugar level</option>
+                        <option value="0">Normal (≤120 mg/dL)</option>
+                        <option value="1">Elevated (>120 mg/dL)</option>
+                      </select>
+                    </div>
+                    
+                    <!-- EKG Results -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-graph-up-arrow text-info me-2"></i>ECG Results
+                      </label>
+                      <select name="ekg" class="predict-form-select" required>
+                        <option value="">Select ECG result</option>
+                        <option value="0">Normal findings</option>
+                        <option value="1">ST-T Wave abnormalities detected</option>
+                        <option value="2">Left ventricular hypertrophy present</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Max Heart Rate -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-speedometer2 text-danger me-2"></i>Max Heart Rate (BPM)
+                      </label>
+                      <input
+                        type="number"
+                        name="maxhr"
+                        class="predict-form-control"
+                        placeholder="Enter heart rate (60-220 BPM)"
+                        min="60"
+                        max="220"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- Exercise Angina -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-person-arms-up text-warning me-2"></i>Exercise Angina
+                      </label>
+                      <select name="exang" class="predict-form-select" required>
+                        <option value="">Select exercise chest pain</option>
+                        <option value="0">No chest pain with exercise</option>
+                        <option value="1">Yes, I experience chest pain</option>
+                      </select>
+                    </div>
+                    
+                    <!-- ST Depression -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-graph-down-arrow text-secondary me-2"></i>ST Depression
+                      </label>
+                      <input
+                        type="number"
+                        name="STD"
+                        step="any"
+                        class="predict-form-control"
+                        placeholder="Enter ST Depression (0.0-6.2)"
+                        min="0"
+                        max="7"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- Slope of ST -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-bar-chart-line text-info me-2"></i>ST Segment Slope
+                      </label>
+                      <select name="slope" class="predict-form-select" required>
+                        <option value="">ST segment slope</option>
+                        <option value="1">Upsloping (improving with exercise)</option>
+                        <option value="2">Flat (no change with exercise)</option>
+                        <option value="3">Downsloping (worsening with exercise)</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Number of Vessels Fluro -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-diagram-3-fill text-primary me-2"></i>Major Vessels (Fluoro)
+                      </label>
+                      <input
+                        type="number"
+                        name="fluro"
+                        step="1"
+                        class="predict-form-control"
+                        placeholder="Enter vessels (0-3)"
+                        min="0"
+                        max="3"
+                        required
+                      />
+                    </div>
+                    
+                    <!-- Thallium -->
+                    <div class="col-md-6 col-lg-4 predict-form-group">
+                      <label class="predict-form-label">
+                        <i class="bi bi-radioactive text-warning me-2"></i>Thallium Scan Result
+                      </label>
+                      <input
+                        type="number"
+                        name="Th"
+                        class="predict-form-control"
+                        placeholder="Enter thalassemia (0-7)"
+                        min="0"
+                        max="7"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
+                  <div class="mt-3 text-center">
+                    <button type="submit" class="predict-submit-btn">
+                      <i class="bi bi-heart-pulse-fill me-2"></i>Analyze Heart Health
+                      <i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </form>
+                
+                <div class="text-center mt-4">
+                  <div class="medical-info-card p-3 rounded-4 shadow-sm">
+                    <p class="small text-muted mb-3">Need help understanding medical terms used in this assessment?</p>
+                    <a
+                      class="btn btn-outline-primary btn-sm d-inline-flex align-items-center fw-semibold medical-terms-btn"
+                      href="https://www.heart.org/en/health-topics/consumer-healthcare/what-is-cardiovascular-disease/coronary-artery-disease"
+                      target="_blank"
+                      role="button"
+                    >
+                      <i class="bi bi-book me-2"></i>Medical Terms Guide
+                      <i class="bi bi-box-arrow-up-right ms-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="footer-adj mt-5">
+      <div class="container py-4">
+        <div class="row g-4 justify-content-center">
+          <!-- Column 1: Brand & Mission -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Logo and Brand -->
+            <div class="d-flex align-items-center mb-3">
+              <img
+                src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
+                alt="CardioInsight Logo"
+                class="rounded-circle me-3"
+                style="width: 40px; height: 40px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);"
+              />
+              <h5 class="fw-bold mb-0 text-white" style="font-size: 1.4rem; letter-spacing: 1px;">CardioInsight</h5>
+            </div>
+            <div class="footer-text">
+              <p class="mb-2 text-white-75 small">
+                Empowering heart health through AI-driven insights and guidance for a healthier life.
+              </p>
+              <p class="mb-0 fw-semibold text-white footer-copyright">© 2025 CardioInsight. All rights reserved.</p>
+            </div>
+          </div>
+          
+          <!-- Column 2: Quick Links -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h6 class="footer-title text-uppercase mb-3">Quick Links</h6>
+            <ul class="footer-links">
+              <li class="mb-1"><a href="{{ url_for('home') }}" class="footer-link">Home</a></li>
+              <li class="mb-1"><a href="{{ url_for('cardiac_info') }}" class="footer-link">Cardiac Information</a></li>
+              <li class="mb-1"><a href="{{ url_for('prevention') }}" class="footer-link">Prevention Tips</a></li>
+              <li><a href="{{ url_for('statistics') }}" class="footer-link">Health Statistics</a></li>
+            </ul>
+          </div>
+          
+          <!-- Column 3: Health Resources -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h6 class="footer-title text-uppercase mb-3">Health Resources</h6>
+            <ul class="footer-links">
+              <li class="mb-1"><a href="https://www.who.int/health-topics/cardiovascular-diseases" target="_blank" class="footer-link">WHO - Cardiovascular Diseases</a></li>
+              <li class="mb-1"><a href="https://www.heart.org/" target="_blank" class="footer-link">American Heart Association</a></li>
+              <li class="mb-1"><a href="https://www.cdc.gov/heartdisease/" target="_blank" class="footer-link">CDC - Heart Disease</a></li>
+              <li><a href="https://www.acc.org/" target="_blank" class="footer-link">American College of Cardiology</a></li>
+            </ul>
+          </div>
+          
+          <!-- Column 4: Contact & Social -->
+          <div class="col-lg-3 col-md-6">
+            <h6 class="footer-title text-uppercase mb-3">Connect With Us</h6>
+            <div class="contact-info mb-3">
+              <div class="contact-item mb-2">
+                <i class="bi bi-envelope me-2"></i>
+                <a href="mailto:support@cardioinsight.com" class="footer-link">support@cardioinsight.com</a>
+              </div>
+              <div class="contact-item mb-3">
+                <i class="bi bi-telephone me-2"></i>
+                <span class="text-white">+880-1748829422</span>
+              </div>
+            </div>
+            <!-- Social Links -->
+            <div class="social-links">
+              <span class="small text-white-50 mb-2 d-block">Follow Us:</span>
+              <a href="#" class="social-link me-2" title="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-link me-2" title="Twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="social-link me-2" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
