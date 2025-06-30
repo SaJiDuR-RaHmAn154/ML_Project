@@ -185,4 +185,12 @@ Below are some screenshots demonstrating the CardioInsight web app:
 ![Profile Page](/Frontend/static/Images/user_profile1.png)
 ![Profile Page](/Frontend/static/Images/user_profile2.png)
 
+### Result Page
+![Result Page](/Frontend/static/Images/result1.png)
+![Result Page](/Frontend/static/Images/result2.png)
+
+### Report Page
+![Report Page](/Frontend/static/Images/report1.png)
+![Report Page](/Frontend/static/Images/report2.png)
+
 **Enjoy using CardioInsight! Stay heart healthy.**
