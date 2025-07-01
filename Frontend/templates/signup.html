@@ -1,186 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Signup - Heart Disease Prediction</title>
     <meta charset="UTF-8" />
+    <title>Sign Up - CardioInsight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Bootstrap 5 CSS for toast positioning -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='CSS/singup.css') }}"
-    />
     <link
       rel="icon"
       type="image/png"
       href="{{ url_for('static', filename='Images/favicon.png') }}"
     />
+    <!-- Bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/home.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/login.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/signup.css') }}"
+    />
   </head>
-  <body
-    class="relative min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#0f2027] via-[#2c5364] to-[#2dd4bf] overflow-hidden"
-  >
+  <body>
+    <!-- Floating Particles Background -->
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Toast Container -->
     {% if msg %}
     <div
       aria-live="polite"
       aria-atomic="true"
       class="position-fixed top-0 start-50 translate-middle-x p-3"
-      style="z-index: 1080; min-width: 340px"
+      style="z-index: 1080;"
     >
       <div
         id="mainToast"
-        class="toast align-items-center text-white border-0 shadow-lg"
+        class="toast shadow-lg border-0 rounded-3 {% if msg_type == 'success' %}text-bg-success{% elif msg_type == 'danger' %}text-bg-danger{% else %}text-bg-info{% endif %}"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        data-bs-delay="2500"
-        style="border-radius: 0.75rem; min-width: 320px; background: {{ '#22c55e' if msg_type == 'success' else '#dc3545' }};"
+        data-bs-delay="4000"
+        style="min-width: 320px; max-width: 500px;"
       >
-        <div class="d-flex align-items-center">
-          <div
-            class="toast-body w-100 text-center fw-semibold fs-5"
-            style="
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            "
-          >
-            {{ msg }}
+        <div class="toast-header">
+          <div class="me-2">
+            {% if msg_type == 'success' %}
+            <i class="bi bi-check-circle-fill text-success"></i>
+            {% elif msg_type == 'danger' %}
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+            {% else %}
+            <i class="bi bi-info-circle-fill text-info"></i>
+            {% endif %}
           </div>
+          <strong class="me-auto">
+            {% if msg_type == 'success' %}
+            Success
+            {% elif msg_type == 'danger' %}
+            Error
+            {% else %}
+            Info
+            {% endif %}</strong>
           <button
             type="button"
-            class="btn-close btn-close-white me-2 m-auto"
+            class="btn-close"
             data-bs-dismiss="toast"
             aria-label="Close"
           ></button>
         </div>
+        <div class="toast-body">
+          {{ msg }}
+        </div>
       </div>
     </div>
+    {% endif %}
+
+    <!-- Main Container -->
+    <div class="min-vh-100 d-flex align-items-center justify-content-center py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-12 col-lg-12">
+            <div class="card shadow-2xl border-0 rounded-4 overflow-hidden signup-main-card">
+              <div class="row g-0">
+                <!-- Left Side - Branding -->
+                <div class="col-lg-6 d-none d-lg-flex">
+                  <div class="login-hero-section w-100 d-flex align-items-center justify-content-center p-5">
+                    <div class="text-center text-white">
+                      <!-- Logo -->
+                      <div class="mb-4">
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0261/5905/products/3144160904-MATT_1548730871731_grande.png?v=1571708834"
+                          alt="CardioInsight Logo"
+                          class="rounded-circle shadow-lg mb-3 logo-animated signup-left-logo"
+                        />
+                      </div>
+                      <!-- Features -->
+                      <div class="mb-4">
+                        <h4 class="fw-bold mb-3 signup-left-title">
+                          Join CardioInsight
+                        </h4>
+                        <p class="lead mb-4">Start your journey to better heart health today.</p>
+                        <div class="text-start mx-auto signup-left-content">
+                          <div class="mb-2">
+                            <i class="bi bi-person-plus me-2"></i>
+                            Quick and easy registration
+                          </div>
+                          <div class="mb-2">
+                            <i class="bi bi-envelope-check me-2"></i>
+                            Password sent via email
+                          </div>
+                          <div class="mb-2">
+                            <i class="bi bi-heart-pulse me-2"></i>
+                            AI-powered health insights
+                          </div>
+                          <div class="mb-2">
+                            <i class="bi bi-shield-check me-2"></i>
+                            Secure and private
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Side - Signup Form -->
+                <div class="col-lg-6">
+                  <div class="p-5 login-form-section">
+                    <!-- Mobile Logo -->
+                    <div class="d-lg-none text-center mb-4">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0261/5905/products/3144160904-MATT_1548730871731_grande.png?v=1571708834"
+                        alt="CardioInsight Logo"
+                        class="rounded-circle shadow mb-3 logo-animated-mobile signup-right-logo"
+                      />
+                      <h3 class="text-gradient fw-bold">CardioInsight</h3>
+                    </div>
+
+                    <!-- Form Header -->
+                    <div class="text-center mb-4">
+                      <h3 class="fw-bold mb-2 signup-right-title">
+                        Create Account
+                      </h3>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <form action="/signup" method="POST" class="needs-validation" novalidate autocomplete="off">
+                      <!-- Username Field -->
+                      <div class="mb-3">
+                        <label for="username" class="form-label fw-semibold">
+                          <i class="bi bi-person me-2"></i>Username
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control form-control-lg rounded-3 signup-form-input"
+                          id="username"
+                          name="un"
+                          placeholder="Enter your username"
+                          required
+                          minlength="3"
+                          maxlength="50"
+                          pattern="[a-zA-Z0-9_]{3,50}"
+                          value="{{ request.form.get('un', '') }}"
+                          autocomplete="username"
+                        />
+                        <div class="invalid-feedback">
+                          Please provide a username (3-50 characters, letters, numbers, and underscores only).
+                        </div>
+                      </div>
+
+                      <!-- Email Field -->
+                      <div class="mb-4">
+                        <label for="email" class="form-label fw-semibold">
+                          <i class="bi bi-envelope me-2"></i>Email Address
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control form-control-lg rounded-3 signup-form-input"
+                          id="email"
+                          name="em"
+                          placeholder="Enter your email address"
+                          required
+                          maxlength="100"
+                          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                          value="{{ request.form.get('em', '') }}"
+                          autocomplete="email"
+                        />
+                        <div class="invalid-feedback">
+                          Please provide a valid email address.
+                        </div>
+                        <div class="form-text">
+                          <i class="bi bi-info-circle me-1"></i>Your password will be sent to this email address
+                        </div>
+                      </div>
+
+                      <!-- Signup Button -->
+                      <button
+                        type="submit"
+                        id="signupButton"
+                        class="btn btn-lg w-100 rounded-3 fw-semibold mb-3"
+                        style="background: linear-gradient(135deg, #2c5364 0%, #0891b2 50%, #2dd4bf 100%); 
+                               color: white; 
+                               border: none; 
+                               padding: 14px 24px; 
+                               font-size: 1.1rem; 
+                               letter-spacing: 0.025em;
+                               box-shadow: 0 4px 15px rgba(44, 83, 100, 0.3);
+                               transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(44, 83, 100, 0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(44, 83, 100, 0.3)'"
+                      >
+                        <span id="signupButtonText">
+                          <i class="bi bi-person-plus me-2"></i>
+                          <span>Create Account</span>
+                        </span>
+                        <span id="signupLoadingText" style="display: none;">
+                          <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          <span>Creating Account...</span>
+                        </span>
+                      </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="text-center mb-3">
+                      <span class="text-muted">Already have an account?</span>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="text-center mb-3">
+                      <a
+                        href="{{ url_for('login') }}"
+                        class="btn btn-outline-secondary btn-lg w-100 rounded-3 fw-semibold signup-btn"
+                      >
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In to Account
+                      </a>
+                    </div>
+
+                    <!-- Guest Access -->
+                    <div class="text-center">
+                      <div class="mb-3">
+                        <small class="text-muted d-block mb-1 signup-help-text">
+                          <i class="bi bi-info-circle me-1"></i>
+                          Want to explore first?
+                        </small>
+                      </div>
+                      <a
+                        href="{{ url_for('home', guest=1) }}"
+                        class="btn btn-guest-access btn-lg w-100 rounded-3 fw-semibold signup-link-container"
+                      >
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span>Continue as Guest</span>
+                        <i class="bi bi-arrow-right ms-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% if msg %}
     <script>
+      // Toast functionality
       document.addEventListener("DOMContentLoaded", function () {
         var toastEl = document.getElementById("mainToast");
         if (toastEl) {
-          var toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+          var toast = new bootstrap.Toast(toastEl, { delay: 4000 });
           toast.show();
         }
       });
     </script>
     {% endif %}
-    <div
-      class="absolute inset-0 bg-gradient-to-tr from-white/20 via-cyan-100/30 to-teal-100/40 backdrop-blur-[2px] pointer-events-none z-0"
-    ></div>
-    <div class="relative z-10 w-full flex items-center justify-center">
-      <div
-        class="flex flex-col md:flex-row w-full max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden bg-white/80 backdrop-blur-lg"
-      >
-        <!-- Side Image (hidden on mobile) -->
-        <div
-          class="hidden md:flex md:w-1/2 bg-gradient-to-br from-[#2d8ea1] to-[#6dd5ed] items-center justify-center p-8"
-        >
-          <div class="text-center">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0261/5905/products/3144160904-MATT_1548730871731_grande.png?v=1571708834"
-              alt="Heart"
-              class="rounded-full shadow-lg mx-auto mb-6 w-48 h-48 object-cover border-4 border-white/70"
-            />
-            <h2 class="text-3xl font-bold text-white mb-2 tracking-wide">
-              CardioInsight
-            </h2>
-            <p class="text-white/90 text-lg max-w-xs mx-auto">
-              Join us and take control of your heart health.<br />
-              <span class="text-yellow-200 font-semibold"
-                >Sign up for a healthier tomorrow!</span
-              >
-            </p>
-          </div>
-        </div>
-        <!-- Signup Card -->
-        <div class="flex-1 flex items-center justify-center p-8">
-          <div
-            class="w-full max-w-md bg-white/90 rounded-2xl shadow-xl p-8 transition-transform duration-300 hover:scale-[1.025] hover:shadow-2xl"
-          >
-            <div class="text-center mb-6">
-              <span
-                class="inline-flex items-center justify-center rounded-full bg-blue-50 p-3 shadow mb-3"
-              >
-                <svg
-                  class="w-10 h-10 text-[#2d8ea1]"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 19.5a7.5 7.5 0 0115 0v.25a2.25 2.25 0 01-2.25 2.25h-10.5A2.25 2.25 0 014.5 19.75V19.5z"
-                  />
-                </svg>
-              </span>
-              <h4 class="text-2xl font-bold text-[#2d8ea1] mb-1">Sign Up</h4>
-              <div class="text-gray-500 mb-2 text-base">
-                Create your account
-              </div>
-            </div>
-            <form action="/signup" method="POST" autocomplete="off">
-              <div class="mb-4">
-                <input
-                  type="text"
-                  name="un"
-                  class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-4 py-3 text-lg transition"
-                  placeholder="Enter Username"
-                  required
-                  autofocus
-                  value="{{ request.form.get('un', '') }}"
-                />
-              </div>
-              <div class="mb-4">
-                <input
-                  type="email"
-                  name="em"
-                  class="form-control form-control-lg block w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#38bdf8] focus:border-[#38bdf8] hover:border-[#2dd4bf] hover:ring-2 hover:ring-[#2dd4bf] px-4 py-3 text-lg transition"
-                  placeholder="Enter Email"
-                  required
-                  value="{{ request.form.get('em', '') }}"
-                />
-              </div>
-              <div class="mb-2">
-                <button
-                  type="submit"
-                  class="w-full py-3 rounded-lg bg-gradient-to-r from-[#2d8ea1] to-[#6dd5ed] text-white font-bold text-lg shadow-md hover:from-[#1abc9c] hover:to-[#2d8ea1] transition"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
-            <div class="text-gray-600 text-sm mt-3 mb-1 text-center">
-              Password will be emailed to you
-            </div>
-            <div class="text-center mt-2">
-              <a
-                href="{{ url_for('login') }}"
-                class="text-[#1abc9c] hover:underline text-sm"
-                >Already Registered? Click here to Login</a
-              >
-            </div>
-            <div class="text-center mt-4">
-              <a
-                href="{{ url_for('home') }}?guest=1"
-                class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-[#e0f7fa] to-[#6dd5ed] text-[#2d8ea1] font-semibold shadow hover:from-[#b2ebf2] hover:to-[#38bdf8] transition"
-                style="text-decoration: none"
-              >
-                <i class="bi bi-house-door-fill text-xl"></i>
-                Guest Mode
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+      // Enhanced form validation with immediate feedback and timeout protection
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          var forms = document.getElementsByClassName('needs-validation');
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              // Clear any existing validation classes first
+              var inputs = form.querySelectorAll('input');
+              inputs.forEach(function(input) {
+                input.classList.remove('is-invalid', 'is-valid');
+              });
+              
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                // Find the first invalid field and focus it
+                var firstInvalidField = form.querySelector(':invalid');
+                if (firstInvalidField) {
+                  firstInvalidField.focus();
+                  firstInvalidField.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                  });
+                }
+              } else {
+                // Additional client-side validation
+                var username = document.getElementById('username').value.trim();
+                var email = document.getElementById('email').value.trim();
+                
+                if (username.length < 3) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  document.getElementById('username').classList.add('is-invalid');
+                  document.getElementById('username').focus();
+                  return;
+                }
+                
+                if (!email.includes('@') || !email.includes('.')) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  document.getElementById('email').classList.add('is-invalid');
+                  document.getElementById('email').focus();
+                  return;
+                }
+                
+                // Show loading state if form is valid
+                var signupButton = document.getElementById('signupButton');
+                var buttonText = document.getElementById('signupButtonText');
+                var loadingText = document.getElementById('signupLoadingText');
+                
+                if (signupButton && buttonText && loadingText) {
+                  signupButton.disabled = true;
+                  buttonText.style.display = 'none';
+                  loadingText.style.display = 'inline-block';
+                  signupButton.style.cursor = 'not-allowed';
+                  signupButton.style.opacity = '0.8';
+                  
+                  // Add a timeout to re-enable the button in case of network/server errors
+                  setTimeout(function() {
+                    if (signupButton.disabled) {
+                      signupButton.disabled = false;
+                      buttonText.style.display = 'inline-block';
+                      loadingText.style.display = 'none';
+                      signupButton.style.cursor = 'pointer';
+                      signupButton.style.opacity = '1';
+                      
+                      // Show timeout message
+                      alert('Request is taking longer than expected. Please try again or check your network connection.');
+                    }
+                  }, 15000); // 15 seconds timeout
+                }
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+          
+          // Add smart validation feedback
+          var inputs = document.querySelectorAll('.needs-validation input[required]');
+          inputs.forEach(function(input) {
+            var hasAttemptedSubmit = false;
+            
+            input.addEventListener('blur', function() {
+              var form = this.closest('form');
+              var formWasValidated = form.classList.contains('was-validated');
+              
+              // Only apply validation styling if form was already validated or user has interacted significantly
+              if (formWasValidated || (this.value.length > 0 && hasAttemptedSubmit)) {
+                if (this.checkValidity()) {
+                  this.classList.remove('is-invalid');
+                  this.classList.add('is-valid');
+                } else {
+                  this.classList.remove('is-valid');
+                  this.classList.add('is-invalid');
+                }
+              }
+            });
+            
+            input.addEventListener('input', function() {
+              var form = this.closest('form');
+              var formWasValidated = form.classList.contains('was-validated');
+              
+              // Mark that user has started interacting
+              if (this.value.length > 0) {
+                hasAttemptedSubmit = true;
+              }
+              
+              // Only update validation if form was already validated
+              if (formWasValidated) {
+                if (this.checkValidity()) {
+                  this.classList.remove('is-invalid');
+                  this.classList.add('is-valid');
+                } else {
+                  this.classList.remove('is-valid');
+                  this.classList.add('is-invalid');
+                }
+              }
+            });
+            
+            // Clear validation styling when input is focused if form hasn't been validated
+            input.addEventListener('focus', function() {
+              var form = this.closest('form');
+              if (!form.classList.contains('was-validated')) {
+                this.classList.remove('is-valid', 'is-invalid');
+              }
+            });
+          });
+        }, false);
+      })();
+    </script>
   </body>
 </html>

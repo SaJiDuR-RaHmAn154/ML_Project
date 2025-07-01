@@ -918,55 +918,57 @@
         </div>
       </div>
 
-      <!-- Toast Container (top center, professional styling) -->
+      <!-- Toast Container -->
       {% if msg %}
       <div
         aria-live="polite"
         aria-atomic="true"
         class="position-fixed top-0 start-50 translate-middle-x p-3"
-        class="toast-container-custom"
+        style="z-index: 1080;"
       >
-        <div id="profileToast" class="toast shadow-lg border-0 rounded-3" role="alert"
-        aria-live="assertive" aria-atomic="true" data-bs-delay="4000"
-        {% if msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower or 'invalid' in msg|lower or 'wrong' in msg|lower) %}
-        class="toast-error"
-        {% elif msg and ('success' in msg|lower or 'deleted' in msg|lower or 'logged out' in msg|lower or 'registered' in msg|lower or 'updated' in msg|lower or 'created' in msg|lower) %}
-        class="toast-success"
-        {% else %}
-        class="toast-info"
-        {% endif %} >
-        <div class="d-flex align-items-center p-3">
-          <div class="me-3">
-            {% if msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower or 'invalid' in msg|lower or 'wrong' in msg|lower) %}
-            <i class="bi bi-exclamation-triangle-fill fs-5"></i>
-            {% elif msg and ('success' in msg|lower or 'deleted' in msg|lower or 'logged out' in msg|lower or 'registered' in msg|lower or 'updated' in msg|lower or 'created' in msg|lower) %}
-            <i class="bi bi-check-circle-fill fs-5"></i>
-            {% else %}
-            <i class="bi bi-info-circle-fill fs-5"></i>
-            {% endif %}
+        <div 
+          id="profileToast" 
+          class="toast shadow-lg border-0 rounded-3 {% if msg_type == 'success' or (msg and ('success' in msg|lower or 'logged in' in msg|lower or 'logged out' in msg|lower or 'registered' in msg|lower or 'updated' in msg|lower or 'created' in msg|lower)) %}text-bg-success{% elif msg_type == 'danger' or (msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower or 'invalid' in msg|lower or 'wrong' in msg|lower)) %}text-bg-danger{% else %}text-bg-info{% endif %}"
+          role="alert"
+          aria-live="assertive" 
+          aria-atomic="true" 
+          data-bs-delay="4000"
+          style="min-width: 320px; max-width: 500px;"
+        >
+          <div class="toast-header">
+            <div class="me-2">
+              {% if msg_type == 'success' or (msg and ('success' in msg|lower or 'logged in' in msg|lower or 'logged out' in msg|lower or 'registered' in msg|lower or 'updated' in msg|lower or 'created' in msg|lower)) %}
+              <i class="bi bi-check-circle-fill text-success"></i>
+              {% elif msg_type == 'danger' or (msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower or 'invalid' in msg|lower or 'wrong' in msg|lower)) %}
+              <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+              {% else %}
+              <i class="bi bi-info-circle-fill text-info"></i>
+              {% endif %}
+            </div>
+            <strong class="me-auto">
+              {% if msg_type == 'success' or (msg and ('success' in msg|lower or 'logged in' in msg|lower or 'logged out' in msg|lower or 'registered' in msg|lower or 'updated' in msg|lower or 'created' in msg|lower)) %}
+              Success
+              {% elif msg_type == 'danger' or (msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower or 'invalid' in msg|lower or 'wrong' in msg|lower)) %}
+              Error
+              {% else %}
+              Info
+              {% endif %}
+            </strong>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="toast-body fw-semibold text-truncate flex-grow-1 toast-body-truncate">
+          <div class="toast-body">
             {{ msg }}
           </div>
-          <button
-            type="button"
-            class="btn-close btn-close-white ms-3"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-            class="toast-timestamp"
-          ></button>
         </div>
       </div>
+      {% endif %}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      var toastEl = document.getElementById("profileToast");
-      if (toastEl) {
-        var toast = new bootstrap.Toast(toastEl, { delay: 4000 });
-        toast.show();
-      }
-    </script>
-    {% endif %}
+    <!-- End of home-section -->
 
     <!-- Footer -->
     <footer class="footer-adj mt-5">
@@ -1037,10 +1039,22 @@
             </div>
           </div>
         </div>
-
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Toast JavaScript -->
+    {% if msg %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toastEl = document.getElementById("profileToast");
+        if (toastEl) {
+          var toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+          toast.show();
+        }
+      });
+    </script>
+    {% endif %}
   </body>
 </html>

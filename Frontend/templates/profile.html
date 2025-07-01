@@ -15,14 +15,20 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='CSS/home.css') }}"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/profile.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/profile.css') }}"
+    />
   </head>
-  <body class="bg-gradient-to-tr from-[#0f2027] via-[#2c5364] to-[#2dd4bf] min-h-screen">
+  <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-ocean fade-in">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
           <span class="navbar-logo-wrapper">
@@ -30,10 +36,9 @@
               src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
               alt="Logo"
               class="navbar-logo"
-              style="width: 38px; height: 38px"
             />
           </span>
-          <span class="ms-2 fw-bold" style="font-size: 2rem; letter-spacing: 1px">CardioInsight</span>
+          <span class="ms-2 fw-bold text-gradient navbar-brand-title">CardioInsight</span>
         </a>
         <button
           class="navbar-toggler"
@@ -43,108 +48,117 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
-              href="{{ url_for('home') }}"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'find' %}active{% endif %}"
-              href="{{ url_for('find') }}"
-              >Predict</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'cardiac_info' %}active{% endif %}"
-              href="{{ url_for('cardiac_info') }}"
-              >Cardiac Info</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'statistics' %}active{% endif %}"
-              href="{{ url_for('statistics') }}"
-              >Statistics</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'prevention' %}active{% endif %}"
-              href="{{ url_for('prevention') }}"
-              >Prevention</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}"
-              href="{{ url_for('profile') }}"
-              >Profile</a
-            >
-          </li>
-          {% if session.get('username') %}
-          <li class="nav-item">
-            <form
-              action="{{ url_for('logout') }}"
-              method="post"
-              style="display: inline"
-            >
-              <button class="nav-link btn btn-link" type="submit">
-                Logout
-              </button>
-            </form>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          </li>
-          {% endif %}
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
+                href="{{ url_for('home') }}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'find' %}active{% endif %}"
+                href="{{ url_for('find') }}"
+                >Predict</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'cardiac_info' %}active{% endif %}"
+                href="{{ url_for('cardiac_info') }}"
+                >Cardiac Info</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'statistics' %}active{% endif %}"
+                href="{{ url_for('statistics') }}"
+                >Statistics</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'prevention' %}active{% endif %}"
+                href="{{ url_for('prevention') }}"
+                >Prevention</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'profile' %}active{% endif %}"
+                href="{{ url_for('profile') }}"
+                >Profile</a
+              >
+            </li>
+            {% if session.get('username') %}
+            <li class="nav-item">
+              <form
+                action="{{ url_for('logout') }}"
+                method="post"
+                class="logout-form"
+              >
+                <button class="nav-link btn btn-link logout-btn" type="submit">
+                  Logout
+                </button>
+              </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </nav>
 
     <!-- Profile Section -->
-    <div class="container mt-5">
+    <div class="container mt-5 fade-in">
       <div class="row justify-content-center">
-        <div class="col-lg-9">
-          <div class="profile-card shadow-sm p-4" style="max-width: 800px; margin: 0 auto; border-radius: 1.2rem;">
+        <div class="col-12">
+          <!-- Combined Profile and History Card -->
+          <div class="profile-main-card mb-4 card-ocean shadow-lg">
+            <!-- Profile Header -->
             <div class="d-flex align-items-center mb-4">
-              <div class="profile-avatar me-3">
+              <div class="profile-avatar me-4">
                 <img
                   src="{{ user.profile_pic_url or url_for('static', filename='uploads/default_avatar.png') }}"
                   alt="Profile Photo"
-                  class="rounded-circle border border-2 shadow"
-                  style="width: 80px; height: 80px; object-fit: cover; transition: box-shadow .2s;"
+                  class="rounded-circle profile-photo profile-avatar-large profile-image-zoom"
+                  onclick="openImageZoom(this.src)"
                 />
               </div>
               <div>
-                <h2 class="fw-bold mb-1 gradient-text" style="font-size:2.2rem; letter-spacing:1px;">
-                  {{ user.username }}
-                </h2>
-                <div class="text-secondary fs-5">
-                  <i class="bi bi-envelope-at me-1"></i>{{ user.email }}
+                <h1 class="profile-name mb-2">{{ user.username }}</h1>
+                <div class="profile-email d-flex align-items-center">
+                  <i class="bi bi-envelope-at me-2"></i>{{ user.email }}
                 </div>
               </div>
             </div>
-            <hr />
-            <h4 class="fw-bold mb-3 d-flex align-items-center gap-2" style="font-size:1.5rem;">
-              <i class="bi bi-clock-history" style="color:#2dd4bf;"></i>
-              <span class="gradient-text">Checkup History</span>
-            </h4>
+
+            <hr class="profile-divider my-4" />
+
+            <!-- Checkup History Section -->
+            <div class="checkup-header mb-4">
+              <h2 class="checkup-title d-flex align-items-center">
+                <i class="bi bi-clock-history me-3"></i>
+                Checkup History
+              </h2>
+            </div>
+            
             {% if history and history|length > 0 %}
-            <div class="table-responsive">
+            <div class="table-container">
               <form method="post" action="{{ url_for('profile') }}">
-                <table class="table table-striped align-middle shadow-sm" style="border-radius: 0.8rem; overflow: hidden;">
-                  <thead class="table-light">
+                <table class="checkup-table">
+                  <thead>
                     <tr>
                       <th>Date</th>
                       <th>Time</th>
                       <th>Input Data</th>
-                      <th>Prediction</th>
+                      <th>Heart Condition</th>
+                      <th>Detailed Report</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -161,31 +175,32 @@
                         <td>N/A</td>
                       {% endif %}
                       <td>
-                        <details>
-                          <summary class="text-primary fw-semibold" style="cursor:pointer;">Show</summary>
-                          <ul class="mb-0">
-                            {% for k, v in entry.input.items() %}
-                            <li>
-                              <strong>{{ k|capitalize }}:</strong> {{ v }}
-                            </li>
-                            {% endfor %}
-                          </ul>
-                        </details>
+                        <a href="{{ url_for('input_details', entry_id=entry.timestamp) }}" 
+                           class="details-btn">
+                          <i class="bi bi-eye me-1"></i>View Details
+                        </a>
                       </td>
                       <td>
                         {% if "Presence" in entry.result %}
-                        <span class="badge bg-danger bg-opacity-75 px-3 py-2 shadow-sm">Presence</span>
+                        <span class="condition-badge danger">Heart Disease Risk</span>
                         {% else %}
-                        <span class="badge bg-success bg-opacity-75 px-3 py-2 shadow-sm">Absence</span>
+                        <span class="condition-badge success">Healthy Heart</span>
                         {% endif %}
+                      </td>
+                      <td>
+                        <a href="{{ url_for('results', entry_id=entry.timestamp) }}" 
+                           class="report-btn">
+                          <i class="bi bi-eye me-1"></i>View Report
+                        </a>
                       </td>
                       <td>
                         <button
                           type="submit"
                           name="delete_id"
                           value="{{ entry.timestamp }}"
-                          class="btn btn-sm btn-outline-danger shadow-sm"
+                          class="delete-btn"
                           onclick="return confirm('Delete this history entry?')"
+                          title="Delete entry"
                         >
                           <i class="bi bi-trash"></i>
                         </button>
@@ -197,138 +212,165 @@
               </form>
             </div>
             {% else %}
-            <div class="alert alert-info mb-0 rounded-3 shadow-sm fs-6">
-              No checkup history yet. Try a prediction!
+            <div class="no-history-message">
+              <i class="bi bi-info-circle me-2"></i>
+              <strong>No checkup history yet.</strong> Try a prediction to get started with your heart health journey!
             </div>
             {% endif %}
           </div>
 
           <!-- Profile Update Form -->
-          <div class="profile-card mt-5 mb-4 shadow-sm p-4" style="max-width: 800px; margin: 0 auto; border-radius: 1.2rem;">
-            <div class="card-body">
-              <h4 class="card-title mb-4 fw-bold d-flex align-items-center gap-2" style="font-size: 1.6rem; letter-spacing: 1px;">
-                <i class="bi bi-person-lines-fill" style="font-size: 2rem; color: #2dd4bf;"></i>
-                <span class="gradient-text">Update Profile</span>
-              </h4>
-              <form
-                method="post"
-                enctype="multipart/form-data"
-                class="needs-validation"
-                novalidate
-              >
-                <div class="row align-items-center g-4">
-                  <!-- Profile Photo Update (Col 1) -->
-                  <div class="col-12 col-md-5 d-flex flex-column align-items-center">
-                    <div class="position-relative mb-2 update-photo-bg d-flex flex-column align-items-center justify-content-center">
-                      <img
-                        src="{{ user.profile_pic_url or url_for('static', filename='uploads/default_avatar.png') }}"
-                        alt="Profile Photo"
-                        class="rounded-circle border border-2 shadow"
-                        style="width: 110px; height: 110px; object-fit: cover; transition: box-shadow .2s;"
-                        id="updateProfilePic"
+          <div class="card-ocean shadow-lg p-4 mb-5 profile-update-card">
+            <h3 class="fw-bold mb-4 d-flex align-items-center gap-3 section-title">
+              <i class="bi bi-person-lines-fill section-icon"></i>
+              <span class="text-gradient">Update Profile</span>
+            </h3>
+            
+            <form
+              method="post"
+              enctype="multipart/form-data"
+              class="needs-validation"
+              novalidate
+            >
+              <div class="row align-items-center g-4">
+                <!-- Profile Photo Update -->
+                <div class="col-12 col-md-5 d-flex flex-column align-items-center">
+                  <div class="position-relative mb-3">
+                    <img
+                      src="{{ user.profile_pic_url or url_for('static', filename='uploads/default_avatar.png') }}"
+                      alt="Profile Photo"
+                      class="rounded-circle profile-photo update-profile-photo"
+                      id="updateProfilePic"
+                    />
+                    <label
+                      for="profilePicInput"
+                      class="position-absolute bottom-0 end-0 btn-ocean rounded-circle p-2 shadow-lg border-0 photo-upload-btn"
+                      title="Change profile photo"
+                    >
+                      <i class="bi bi-camera camera-icon"></i>
+                      <input
+                        id="profilePicInput"
+                        type="file"
+                        name="profile_pic"
+                        accept="image/*"
+                        class="d-none"
                       />
-                      <label
-                        for="profilePicInput"
-                        class="position-absolute bottom-0 end-0 bg-white rounded-circle p-1 shadow-sm border"
-                        style="cursor: pointer"
-                        title="Change profile photo"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="28"
-                          height="28"
-                          fill="#2d8ea1"
-                          class="bi bi-camera"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                          <path d="M4.5 3a.5.5 0 0 1 .5-.5h1.086a1.5 1.5 0 0 1 1.06.44l.708.708h2.292l.708-.708A1.5 1.5 0 0 1 10.914 2.5H12a.5.5 0 0 1 .5.5v1h1A1.5 1.5 0 0 1 15 5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12V5A1.5 1.5 0 0 1 2.5 3.5h1v-1z"/>
-                        </svg>
-                        <input
-                          id="profilePicInput"
-                          type="file"
-                          name="profile_pic"
-                          accept="image/*"
-                          class="d-none"
-                        />
-                      </label>
-                    </div>
-                    <div class="update-photo-text mt-2 text-center">
-                      <span class="fw-semibold" style="font-size:1.08rem; color:#2c5364;">
-                        Update your profile photo<br>
-                        <span style="font-size:0.97rem; color:#666;">For best results, use a square image (JPG/PNG, max 2MB).</span>
-                      </span>
-                    </div>
+                    </label>
                   </div>
-                  <!-- Username & Email Update (Col 2) -->
-                  <div class="col-12 col-md-7">
-                    <div class="mb-3">
-                      <label class="form-label fw-semibold gradient-label" for="usernameInput">Username</label>
-                      <input
-                        type="text"
-                        name="username"
-                        id="usernameInput"
-                        class="form-control input-effect"
-                        value="{{ user.username }}"
-                        required
-                        autocomplete="off"
-                      />
-                      <div class="invalid-feedback">Username is required.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label fw-semibold gradient-label" for="emailInput">Email</label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="emailInput"
-                        class="form-control input-effect"
-                        value="{{ user.email }}"
-                        required
-                        autocomplete="off"
-                      />
-                      <div class="invalid-feedback">A valid email is required.</div>
-                    </div>
-                    <button type="submit" class="btn btn-gradient px-4 fw-semibold shadow-sm btn-animate w-100 mt-2 mb-4 py-2">
-                      <i class="bi bi-save me-2"></i>Save Changes
-                    </button>
+                  <div class="text-center">
+                    <p class="fw-semibold text-gradient mb-1 update-photo-title">
+                      Update Profile Photo
+                    </p>
+                    <p class="text-muted mb-0 update-photo-description">
+                      JPG/PNG, max 2MB, square format recommended
+                    </p>
                   </div>
                 </div>
-              </form>
-            </div>
+                
+                <!-- Username & Email Update -->
+                <div class="col-12 col-md-7">
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold text-gradient-teal mb-2 form-label-profile" for="usernameInput">
+                      <i class="bi bi-person me-2"></i>Username
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      id="usernameInput"
+                      class="form-control form-control-ocean"
+                      value="{{ user.username }}"
+                      required
+                      autocomplete="off"
+                    />
+                    <div class="invalid-feedback">Username is required.</div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold text-gradient-teal mb-2 form-label-profile" for="emailInput">
+                      <i class="bi bi-envelope me-2"></i>Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="emailInput"
+                      class="form-control form-control-ocean"
+                      value="{{ user.email }}"
+                      required
+                      autocomplete="off"
+                    />
+                    <div class="invalid-feedback">A valid email is required.</div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-ocean w-100 py-3 fw-semibold save-btn">
+                    <i class="bi bi-save me-2"></i>Save Changes
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Toast Container (top center, auto-hide after 2.5s) -->
+    <!-- Image Zoom Modal -->
+    <div id="imageZoomModal" class="zoom-modal">
+      <div class="zoom-modal-content">
+        <button class="zoom-modal-close" onclick="closeImageZoom()">
+          <i class="bi bi-x"></i>
+        </button>
+        <img id="zoomModalImage" src="" alt="Profile Photo" class="zoom-modal-image">
+      </div>
+    </div>
+
+    <!-- Toast Container -->
     <div
       aria-live="polite"
       aria-atomic="true"
-      class="position-fixed top-0 start-50 translate-middle-x p-3"
-      style="z-index: 1080"
+      class="position-fixed top-0 start-50 translate-middle-x p-3 toast-container"
     >
       <div
         id="profileToast"
-        class="toast shadow-lg border-0"
+        class="toast shadow-lg border-0 rounded-3 
+        {% if msg_type == 'error' %}
+          toast-error
+        {% elif msg_type == 'success' %}
+          toast-success
+        {% elif msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower) %}
+          toast-error
+        {% elif msg and ('success' in msg|lower or 'deleted' in msg|lower or 'updated' in msg|lower) %}
+          toast-success
+        {% else %}
+          toast-info
+        {% endif %}"
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        data-bs-delay="2500"
-        {% if msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower) %}
-          style="background: #dc3545; color: #fff;"
-        {% elif msg and ('success' in msg|lower or 'deleted' in msg|lower) %}
-          style="background: #22c55e; color: #fff;"
-        {% else %}
-          style="background: linear-gradient(90deg, #2dd4bf 0%, #2c5364 100%); color: #fff;"
-        {% endif %}
+        data-bs-delay="4000"
       >
-        <div class="d-flex align-items-center">
-          <div class="toast-body text-center w-100 fw-semibold fs-5">
-            {{ msg }}
+        <div class="d-flex align-items-center p-0">
+          <div class="ms-3 me-2">
+            {% if msg_type == 'error' %}
+              <i class="bi bi-exclamation-circle-fill text-white toast-icon"></i>
+            {% elif msg_type == 'success' and msg and 'deleted' in msg|lower %}
+              <i class="bi bi-trash-fill text-white toast-icon"></i>
+            {% elif msg_type == 'success' %}
+              <i class="bi bi-check-circle-fill text-white toast-icon"></i>
+            {% elif msg and ('error' in msg|lower or 'fail' in msg|lower or 'exists' in msg|lower) %}
+              <i class="bi bi-exclamation-circle-fill text-white toast-icon"></i>
+            {% elif msg and ('success' in msg|lower or 'updated' in msg|lower) %}
+              <i class="bi bi-check-circle-fill text-white toast-icon"></i>
+            {% elif msg and 'deleted' in msg|lower %}
+              <i class="bi bi-trash-fill text-white toast-icon"></i>
+            {% else %}
+              <i class="bi bi-info-circle-fill text-white toast-icon"></i>
+            {% endif %}
+          </div>
+          <div class="toast-body fw-semibold text-truncate flex-grow-1 toast-text">
+            <span class="text-white">{{ msg }}</span>
           </div>
           <button
             type="button"
-            class="btn-close btn-close-white me-2 m-auto"
+            class="btn-close btn-close-white me-3 toast-close"
             data-bs-dismiss="toast"
             aria-label="Close"
           ></button>
@@ -340,7 +382,7 @@
     {% if msg %}
     <script>
       var toastEl = document.getElementById("profileToast");
-      var toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+      var toast = new bootstrap.Toast(toastEl, { delay: 4000 });
       toast.show();
     </script>
     {% endif %}
@@ -373,6 +415,110 @@
             document.getElementById("updateProfilePic").src = URL.createObjectURL(file);
           }
         });
+
+      // Image zoom functionality
+      function openImageZoom(imageSrc) {
+        const modal = document.getElementById('imageZoomModal');
+        const modalImage = document.getElementById('zoomModalImage');
+        modalImage.src = imageSrc;
+        modal.classList.add('show');
+        
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeImageZoom() {
+        const modal = document.getElementById('imageZoomModal');
+        modal.classList.remove('show');
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+      }
+
+      // Close modal when clicking outside the image
+      document.getElementById('imageZoomModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeImageZoom();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeImageZoom();
+        }
+      });
     </script>
+
+    <!-- Footer -->
+    <footer class="footer-adj mt-5">
+      <div class="container py-4">
+        <div class="row g-4 justify-content-center">
+          <!-- Column 1: Brand & Mission -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <!-- Logo and Brand -->
+            <div class="d-flex align-items-center mb-3">
+              <img
+                src="{{ url_for('static', filename='Images/heartLogo.jpg') }}"
+                alt="CardioInsight Logo"
+                class="rounded-circle me-3 footer-logo"
+              />
+              <h5 class="fw-bold mb-0 text-white footer-brand-text">CardioInsight</h5>
+            </div>
+            <div class="footer-text">
+              <p class="mb-2 text-white-75 small">
+                Empowering heart health through AI-driven insights and guidance for a healthier life.
+              </p>
+              <p class="mb-0 fw-semibold text-white footer-copyright">© 2025 CardioInsight. All rights reserved.</p>
+            </div>
+          </div>
+          
+          <!-- Column 2: Quick Links -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h6 class="footer-title text-uppercase mb-3">Quick Links</h6>
+            <ul class="footer-links">
+              <li class="mb-1"><a href="{{ url_for('home') }}" class="footer-link">Home</a></li>
+              <li class="mb-1"><a href="{{ url_for('cardiac_info') }}" class="footer-link">Cardiac Information</a></li>
+              <li class="mb-1"><a href="{{ url_for('prevention') }}" class="footer-link">Prevention Tips</a></li>
+              <li><a href="{{ url_for('statistics') }}" class="footer-link">Health Statistics</a></li>
+            </ul>
+          </div>
+          
+          <!-- Column 3: Health Resources -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h6 class="footer-title text-uppercase mb-3">Health Resources</h6>
+            <ul class="footer-links">
+              <li class="mb-1"><a href="https://www.who.int/health-topics/cardiovascular-diseases" target="_blank" class="footer-link">WHO - Cardiovascular Diseases</a></li>
+              <li class="mb-1"><a href="https://www.heart.org/" target="_blank" class="footer-link">American Heart Association</a></li>
+              <li class="mb-1"><a href="https://www.cdc.gov/heartdisease/" target="_blank" class="footer-link">CDC - Heart Disease</a></li>
+              <li><a href="https://www.acc.org/" target="_blank" class="footer-link">American College of Cardiology</a></li>
+            </ul>
+          </div>
+          
+          <!-- Column 4: Contact & Social -->
+          <div class="col-lg-3 col-md-6">
+            <h6 class="footer-title text-uppercase mb-3">Connect With Us</h6>
+            <div class="contact-info mb-3">
+              <div class="contact-item mb-2">
+                <i class="bi bi-envelope me-2"></i>
+                <a href="mailto:support@cardioinsight.com" class="footer-link">support@cardioinsight.com</a>
+              </div>
+              <div class="contact-item mb-3">
+                <i class="bi bi-telephone me-2"></i>
+                <span class="text-white">+880-1748829422</span>
+              </div>
+            </div>
+            <!-- Social Links -->
+            <div class="social-links">
+              <span class="small text-white-50 mb-2 d-block">Follow Us:</span>
+              <a href="#" class="social-link me-2" title="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="social-link me-2" title="Twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="social-link me-2" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
