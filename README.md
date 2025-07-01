@@ -49,7 +49,7 @@ ML_Project/
 ├── requirements.txt                # Python dependencies
 ├── venv/                          # Virtual environment
 │
-└── Frontend/                      # Main web application
+└── Frontend+Backend/                      # Main web application
     ├── app.py                     # Flask backend with routing & logic
     ├── database.py                # MongoDB operations & user management
     ├── heartdiseaseprediction.model # ML model for predictions
@@ -148,7 +148,7 @@ pip install -r requirements.txt
 
 ### 5. **Configure Email Settings**
 
-Update email credentials in `Frontend/app.py`:
+Update email credentials in `Frontend+Backend/app.py`:
 ```python
 app.config["MAIL_USERNAME"] = "your_email@gmail.com"
 app.config["MAIL_PASSWORD"] = "your_app_password"
@@ -172,7 +172,7 @@ The pre-trained models are already included in the project.
 ### 7. **Launch Application**
 
 ```bash
-cd Frontend
+cd Frontend+Backend
 python app.py
 ```
 
@@ -279,7 +279,7 @@ python app.py
 - **Email:** Flask-Mail for notifications
 - **ML Libraries:** scikit-learn, pandas, numpy
 
-### **Frontend**
+### **Frontend+Backend**
 - **UI Framework:** Bootstrap 5.3.3
 - **Icons:** Bootstrap Icons
 - **Styling:** Custom CSS with ocean theme
@@ -310,7 +310,7 @@ python app.py
 - Prediction history storage
 - Profile management functions
 
-### **Frontend Templates**
+### **Frontend+Backend Templates**
 - **Authentication Pages:** login.html, signup.html, forgot.html
 - **Dashboard:** home.html, profile.html
 - **Prediction System:** find.html, check.html, results.html, input_details.html
@@ -358,123 +358,31 @@ venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
-**🔴 Port Already in Use**
-```bash
-# Kill process on port 4000
-# macOS/Linux
-lsof -ti:4000 | xargs kill -9
-
-# Windows
-netstat -ano | findstr :4000
-taskkill /PID <process_id> /F
-```
-
-**🔴 Model Loading Error**
-- Ensure model files exist in `Frontend/` directory
-- Retrain models using the Jupyter notebook if needed
-- Check pickle file compatibility
-
-### **Performance Optimization**
-
-**🚀 Database Optimization**
-- Create indexes for frequently queried fields
-- Implement connection pooling for production
-- Consider MongoDB Atlas for cloud deployment
-
-**🚀 Frontend Optimization**
-- CSS files are already minified (comments removed)
-- Static files served efficiently by Flask
-- Responsive images and optimized loading
-
-### **Production Deployment**
-
-**🌐 Recommended Stack**
-- **Web Server:** Gunicorn + Nginx
-- **Database:** MongoDB Atlas (cloud)
-- **Hosting:** AWS EC2, Heroku, or DigitalOcean
-- **SSL:** Let's Encrypt for HTTPS
-
-**🔧 Environment Variables**
-```bash
-# Create .env file for production
-MONGODB_URI=mongodb://localhost:27017/
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_app_password
-SECRET_KEY=your_secret_key
-```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions to CardioInsight! Here's how you can help:
-
-### **Development Guidelines**
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### **Areas for Contribution**
-- 🧠 **ML Model Improvements:** Add new algorithms or features
-- 🎨 **UI/UX Enhancements:** Improve design and user experience
-- 📊 **Data Visualization:** Add charts and analytics
-- 🔒 **Security Features:** Enhance authentication and data protection
-- 📱 **Mobile App:** React Native or Flutter implementation
-- 🧪 **Testing:** Unit tests and integration tests
-
-### **Code Standards**
-- Follow PEP 8 for Python code
-- Use semantic HTML and CSS best practices
-- Add comments for complex logic
-- Test thoroughly before submitting PRs
-
----
-
-## 📋 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 📧 Support & Contact
-
-- **Issues:** [GitHub Issues](https://github.com/your-username/cardioinsight/issues)
-- **Email:** cardioinsight.support@example.com
-- **Documentation:** [Project Wiki](https://github.com/your-username/cardioinsight/wiki)
-
 ---
 
 ## 📷 Application Screenshots
 
 ### 🏠 **Landing Page**
-![Home Page - Modern ocean-themed interface with navigation and guest access](/Frontend/static/Images/home_screenshot.png)
+![Home Page - Modern ocean-themed interface with navigation and guest access](/Frontend+Backend/static/Images/home_screenshot.png)
 
 ### 🔐 **Authentication System**
-![Login Page - Secure authentication with remember me functionality](/Frontend/static/Images/login_screenshot.png)
-![Signup Page - User registration with email verification](/Frontend/static/Images/signup_screenshot.png)
-![Forgot Password - Automated password recovery system](/Frontend/static/Images/forgot_screenshot.png)
+![Login Page - Secure authentication with remember me functionality](/Frontend+Backend/static/Images/login_screenshot.png)
+![Signup Page - User registration with email verification](/Frontend+Backend/static/Images/signup_screenshot.png)
+![Forgot Password - Automated password recovery system](/Frontend+Backend/static/Images/forgot_screenshot.png)
 
 ### 🏥 **Health Assessment**
-![Prediction Form - Comprehensive health metrics input](/Frontend/static/Images/predict_screenshot.png)
-![Results Page - AI prediction with confidence scores](/Frontend/static/Images/result1.png)
-![Detailed Results - In-depth analysis and recommendations](/Frontend/static/Images/result2.png)
+![Prediction Form - Comprehensive health metrics input](/Frontend+Backend/static/Images/predict_screenshot.png)
+![Results Page - AI prediction with confidence scores](/Frontend+Backend/static/Images/result1.png)
+![Detailed Results - In-depth analysis and recommendations](/Frontend+Backend/static/Images/result2.png)
 
 ### 👤 **User Dashboard**
-![User Profile - Personal dashboard with prediction history](/Frontend/static/Images/user_profile1.png)
-![Health History - Complete tracking of health assessments](/Frontend/static/Images/user_profile2.png)
+![User Profile - Personal dashboard with prediction history](/Frontend+Backend/static/Images/user_profile1.png)
+![Health History - Complete tracking of health assessments](/Frontend+Backend/static/Images/user_profile2.png)
 
 ### 📊 **Reports & Analytics**
-![Health Report - Comprehensive analysis for medical consultation](/Frontend/static/Images/report1.png)
-![Statistical Insights - Population health data and trends](/Frontend/static/Images/report2.png)
+![Health Report - Comprehensive analysis for medical consultation](/Frontend+Backend/static/Images/report1.png)
+![Statistical Insights - Population health data and trends](/Frontend+Backend/static/Images/report2.png)
 
-### 📚 **Educational Resources**
-- **Cardiac Information:** Interactive learning about heart health
-- **Prevention Guidelines:** Evidence-based lifestyle recommendations
-- **Health Statistics:** Population-level insights and research data
-
----
 
 **🎯 CardioInsight: Your AI-powered companion for heart health monitoring and prevention.**
 
