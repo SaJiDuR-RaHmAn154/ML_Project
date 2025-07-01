@@ -136,14 +136,7 @@ pip install -r requirements.txt
 ### 4. **Configure Database**
 
 **Install & Start MongoDB:**
-- Download [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-- Start MongoDB service:
-  ```bash
-  # On macOS (with Homebrew)
-  brew services start mongodb-community
-  
-  # On Windows/Linux
-  mongod
+- Download [MongoDB Compass Software](https://www.mongodb.com/try/download/compass)
   ```
 
 ### 5. **Configure Email Settings**
@@ -280,7 +273,7 @@ python app.py
 - **ML Libraries:** scikit-learn, pandas, numpy
 
 ### **Frontend+Backend**
-- **UI Framework:** Bootstrap 5.3.3
+- **UI Framework:** Bootstrap 5.3.3, Tailwind CSS
 - **Icons:** Bootstrap Icons
 - **Styling:** Custom CSS with ocean theme
 - **Responsive:** Mobile-first design
@@ -294,76 +287,9 @@ python app.py
 
 ---
 
-## 📁 Code Structure Deep Dive
-
-### **Backend Architecture (`app.py`)**
-- Route handlers for all endpoints
-- User authentication and session management
-- ML model integration and prediction logic
-- Email notification system
-- File upload handling for profile pictures
-
-### **Database Layer (`database.py`)**
-- User registration and authentication
-- Password hashing with Werkzeug
-- MongoDB operations for user data
-- Prediction history storage
-- Profile management functions
-
-### **Frontend+Backend Templates**
-- **Authentication Pages:** login.html, signup.html, forgot.html
-- **Dashboard:** home.html, profile.html
-- **Prediction System:** find.html, check.html, results.html, input_details.html
-- **Educational:** cardiac_info.html, prevention.html, statistics.html
-
-### **Styling System**
-- Modular CSS architecture
-- Page-specific stylesheets
-- Consistent ocean theme
-- Responsive breakpoints
-- Professional medical interface
-
----
-
-## 🛠️ Troubleshooting & FAQ
-
-### **Common Issues**
-
-**🔴 MongoDB Connection Error**
-```bash
-# Start MongoDB service
-# macOS (Homebrew)
-brew services start mongodb-community
-
-# Windows
-net start MongoDB
-
-# Linux/Manual
-mongod --dbpath /data/db
-```
-
-**🔴 Email Not Sending**
-- Verify Gmail App Password (not regular password)
-- Check Flask-Mail configuration in `app.py`
-- Ensure 2FA is enabled on Gmail account
-- Test with different email provider if needed
-
-**🔴 Module Import Errors**
-```bash
-# Ensure virtual environment is activated
-source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate     # Windows
-
-# Reinstall dependencies
-pip install -r requirements.txt
-```
-
----
-
 ## 📷 Application Screenshots
 
 ### 🏠 **Landing Page**
-![Home Page - Modern ocean-themed interface with navigation and guest access](/Frontend+Backend/static/Images/home_screenshot.png)
 
 ### 🔐 **Authentication System**
 ![Login Page - Secure authentication with remember me functionality](/Frontend+Backend/static/Images/login_screenshot.png)
